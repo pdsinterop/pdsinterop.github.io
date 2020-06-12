@@ -1,4 +1,4 @@
-# PDS Interop</h1>
+# PDS Interop
 
 Interoperability between Personal Data Stores
 
