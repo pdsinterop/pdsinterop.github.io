@@ -38,6 +38,6 @@ aux_links:
     - https://github.com/pdsinterop
 footer_content: Copyright © 2020 PDS Interop. Distributed under a <a href="https://pdsinterop.org/license/">MIT license.</a>
 gh_edit_link: true
-gh_edit_repository: https://github.com/pdsinterop/flysystem-rdf
+gh_edit_repository: https://github.com/pdsinterop/pdsinterop.github.io
 logo: https://avatars3.githubusercontent.com/u/65920341
 search_enabled: true
