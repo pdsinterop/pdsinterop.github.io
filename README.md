@@ -5,7 +5,7 @@
 
 **PDS Interop** stands for **P**ersonal **D**ata **S**tores **Interop**erability.
 
-We are a an open-source, grant and sponsorship driven collaboration, intent on 
+We are an open-source, grant and sponsorship driven collaboration, intent on 
 bringing interoperability between personal data stores to the masses.
 
 Our current mission is to bring [Solid](https://solidproject.org/) to
