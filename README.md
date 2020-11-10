@@ -24,14 +24,16 @@ turns a Nextcloud server into a spec-compliant Solid server.
 
 Our main projects are:
 
+- **[Conventions](https://pdsinterop.org/conventions/)**
+  Conventions around how apps and services store data on your personal data store (project lead Michiel de Jong).
+- **[Solid Test Suites](https://pdsinterop.org/test-suites/)**
+  Test suites for protocols a Personal Data Store may support (project lead Michiel de Jong).
+- **[Solid Nextcloud](https://github.com/pdsinterop/solid-nextcloud)**
+  A plugin to make Nextcloud compatible with Solid (project lead Auke van Slooten).
+- **[PHP Solid Server](https://pdsinterop.org/php-solid-server/)**
+  A standalone PHP Solid server (project lead Ben Peachey).
 - **[Awesome Solid](https://pdsinterop.org/awesome-solid/)**
   Awesome list of Solid (social inked data) tools, libraries, resources, and 
   shiny things (project lead Ben Peachey).
-- **[PHP Solid Server](https://pdsinterop.org/php-solid-server/)**
-  A standalone PHP Solid server (project lead Ben Peachey).
-- **[Solid Nextcloud](https://github.com/pdsinterop/solid-nextcloud)**
-  A plugin to make Nextcloud compatible with Solid (project lead Auke van Slooten).
-- **[Solid Test Suites](https://pdsinterop.org/test-suites/)**
-  Test suites for protocols a Personal Data Store may support (project lead Michiel de Jong).
 
 For other software projects, see [our Github org](https://github.com/pdsinterop).
