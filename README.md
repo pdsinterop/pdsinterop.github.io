@@ -8,9 +8,13 @@
 We are an open-source, grant and sponsorship driven collaboration, intent on 
 bringing interoperability between personal data stores to the masses.
 
-Our current mission is to bring [Solid](https://solidproject.org/) to
+Our first main mission is to bring [Solid](https://solidproject.org/) to
 [Nextcloud](https://nextcloud.com/) by creating an open source Nextcloud app that
 turns a Nextcloud server into a spec-compliant Solid server.
+
+We are also working on providing [test suites](https://pdsinterop.org/test-suites/) for PDS Interop,
+and documenting [conventions](https://pdsinterop.org/conventions/) used by apps and services that store data
+interoperably on your PDS.
 
 ## Members
 
