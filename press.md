@@ -2,7 +2,7 @@
 
 We have already had some mentions in the press or press releases and welcome you to send us mails when one of our projects is mentioned in the press.
 
-- April 2021, Our presentation of Solid on Nextcloud, Solid world April
+- April 2021, Our presentation of Solid on Nextcloud by Yvo Brevoort, Solid world April
   - https://vimeo.com/solidworld/review/531907097/eda903e37f#t=27m08s
 - April 2021, Press release of Nextcloud, announcing Solid for Nextcloud
   - https://nextcloud.com/press/pr20210414/
