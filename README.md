@@ -24,6 +24,9 @@ interoperably on your PDS.
 - Michiel de Jong [@michielbdejong](https://github.com/michielbdejong)
 - Yvo Brevoort [@ylebre](https://github.com/ylebre)
 
+## Watch a video
+A guest lecture about PDS Interop, which Michiel de Jong gave at CERN in September 2021, can be viewed [here](https://cds.cern.ch/record/2782493).
+
 ## Projects
 
 Our main projects are:
