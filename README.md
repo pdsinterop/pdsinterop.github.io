@@ -22,6 +22,7 @@ interoperably on your PDS.
 - Ben Peachey [@Potherca](https://github.com/Potherca)
 - Frank Karlitschek [@karlitschek](https://github.com/karlitschek)
 - Michiel de Jong [@michielbdejong](https://github.com/michielbdejong)
+- Sjoerd van Groning [@sjoerdvangroning](https://github.com/sjoerdvangroning)
 - Yvo Brevoort [@ylebre](https://github.com/ylebre)
 
 ## Listen to a Lecture
