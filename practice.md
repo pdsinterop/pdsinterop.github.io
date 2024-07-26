@@ -1,6 +1,6 @@
 # Solid Interop in Practice
 
-We reached out to a handful of developers who have produced end-user Solid apps to understand:
+In July 2024, we reached out to a handful of developers who have produced end-user Solid apps to understand:
 
 - interoperability challenges and ideals,
 - how to make it easier for people to get into solid, and
