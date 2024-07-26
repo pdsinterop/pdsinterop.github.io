@@ -3,7 +3,7 @@
 In July 2024, we reached out to a handful of developers who have produced end-user Solid apps to understand:
 
 - interoperability challenges and ideals,
-- how to make it easier for people to get into solid, and
+- how to make it easier for people to get into Solid, and
 - what improvements can be made to the developer experience.
 
 [Noel De Martin](https://noeldemartin.com), [Vincent  Tunru](https://vincenttunru.com), [Timea Turdean](https://timeaturdean.com), and [Tim Standen](https://www.linkedin.com/in/tim-standen-6bb4b393) answered the call and their responses follow (edited for clarity, brevity, and flow).
@@ -88,7 +88,7 @@ A lot of Solid apps have moved to a design pattern of "load all the data you can
 
 ### Timea
 
-For me it's the frontend. I am not a designer to make things looks nice and functional at the same time 😅. And if one wants the RDF capability to make the frontend flexible, to adjust to the data model, well.. that is again difficult even if you know about RDF forms.
+For me, it's the frontend. I am not a designer to make things looks nice and functional at the same time 😅. And if one wants RDF capability to make the frontend flexible, to adjust to the data model, that is again difficult even if you know about RDF forms.
 
 I know some of my friends are working on 'web components' for exactly this reason.
 
@@ -98,11 +98,11 @@ I know some of my friends are working on 'web components' for exactly this reaso
 
 ### Tim
 
-To me, interoperability means different apps can access the same data in new, novel ways that fit their use case. A todo app allows you to create calendar events for each todo item without opening your calendar. Emails can be opened with either a traditional "inbox" interface or an IM chat interface. You can message your doctor, and then in the chat, share your medical records with them.
+To me, interoperability means different apps can access the same data in new, novel ways that fit their use case. A to-do app allows you to create calendar events for each to-do item without opening your calendar. Emails can be opened with either a traditional "inbox" interface or an IM chat interface. You can message your doctor, and then in the chat, share your medical records with them.
 
 ### Vincent
 
-I always was a bit sceptical about TimBL's "[Bag of Chips](https://www.w3.org/DesignIssues//BagOfChips.html)" idea: that different applications can look at different subsets of the same data. However, I recently tagged a Mastodon account on a Lemmy post, and then having their reply show up in-thread did feel magical. Likewise, when encountering an interesting post in my Mastodon timeline only to find out that it was a full-fledged blog, with replies shown as comments.
+I was always a bit skeptical about TimBL's "[Bag of Chips](https://www.w3.org/DesignIssues//BagOfChips.html)" idea: that different applications can look at different subsets of the same data. However, I recently tagged a Mastodon account on a Lemmy post, and then having their reply show up in-thread did feel magical. Likewise, when encountering an interesting post in my Mastodon timeline only to find out that it was a full-fledged blog, with replies shown as comments.
 
 ### Timea
 
@@ -112,15 +112,15 @@ What I would like to see is, for example, fitness data stored on my pod with dif
 
 ### Noel
 
-To me interoperability should be transparent, where users don't even notice that it's going on. Quite the opposite, an ecosystem with working interoperability would be one where users are surprised if an app is not compatible with others.
+To me, interoperability should be transparent, where users don't even notice that it's going on. Quite the opposite, an ecosystem with working interoperability would be one where users are surprised if an app is not compatible with others.
 
-Some examples are Emails, RSS, the fediverse, webpages (browsers are interoperable), etc…
+Some examples are Emails, RSS, the Fediverse, webpages (browsers are interoperable), etc…
 
 ## 4) What potential / ideal / dream Solid interactions or app paradigms would get you excited as a developer? And as a user?
 
 ### Noel
 
-As a developer, something like Cambria for Solid would be awesome. As I said, it would be great if it could work even without changing the code in my app. For example, if users themselves can "install schema translations" (or if that can happen automatically even better). In theory this is all possible with RDF reasoning, but in practice I don't think that's working anywhere.
+As a developer, something like Cambria for Solid would be awesome. As I said, it would be great if it could work even without changing the code in my app. For example, if users themselves can "install schema translations" (or if that can happen automatically, even better). In theory this is all possible with RDF reasoning, but in practice I don't think that's working anywhere.
 
 As a user, I would like apps to leverage my pod data to augment the experience. For example, even though a recipe manager's main focus would be to manage recipes, it would be nice to see a list of friends when I'm sharing a recipe, or easily export the ingredients into a TODO list (visible in my Task Manager app), or schedule meals for specific days and see that in my Calendar app, etc… It would also be nice to see "companion apps". For example, I have an app to manage the movies I have watched or will watch. Some companion apps could be a movie recommendation engine, a social network where you see what your friends are watching, etc… There are infinite interesting things you can do with "movies", but if you try to fit everything in a single app it could become cluttered and bloated. With interoperable apps, many applications can work together to give users the experience they want without implementing every possible use case.
 
@@ -128,7 +128,7 @@ I've written more of my thoughts around this topic in [Interoperable Serendipity
 
 ### Timea
 
-Oh, I'm excited about everything when it comes to Solid so it's hard to choose ☺️ In theory, a developer can focus on creating the best frontend and functionality without bothering to learn databases and backend. Security topics which can be quite heavy should just work out of the box with Solid libraries and the developer shouldn't have to know how to configure it even (I'm thinking about spring security configuration which is not easy).
+Oh, I'm excited about everything when it comes to Solid, so it's hard to choose ☺️ In theory, a developer can focus on creating the best frontend and functionality without bothering to learn databases and backend. Security topics which can be quite heavy should just work out of the box with Solid libraries and the developer shouldn't have to know how to configure it even (I'm thinking about spring security configuration which is not easy).
 
 I see advantages for users who care about privacy or supporting local businesses (rather than data monopolies), and there will be more as the ecosystem develops. I want to see an explosion of maximizing the usage and benefit of one's data in every aspect (which is not possible at the moment).
 
