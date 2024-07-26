@@ -10,9 +10,9 @@ In July 2024, we reached out to a handful of developers who have produced end-us
 
 ---
 
-# 1) What's your experience with making Solid apps interoperable? What challenges have you encountered? What possible solutions are you looking for or working on?
+## 1) What's your experience with making Solid apps interoperable? What challenges have you encountered? What possible solutions are you looking for or working on?
 
-## Timea
+### Timea
 
 Making Solid apps interoperable is possible, but you currently need to know how, which I believe is not easy. First, you need to know RDF and about data models/shapes/vocabularies. Then, you need to know about a Solid library in the language you use, or at least an RDF library. After you learn all these, you need to know where to find existing vocabularies if there are any. Then, if you want true interoperability, you need to share yours and properly document it, if you can find the right place…
 
@@ -20,7 +20,7 @@ So, while I have no problem with creating the data model myself, I didn't make t
 
 I'm inclined to believe we need education in different specs of Solid in order for developers and data engineers to even want to share data models in the first place.
 
-## Tim
+### Tim
 
 I have created prototype versions of two apps so far: [PASS](https://github.com/codeforpdx/PASS), a management app for government housing data; and [Solid Calendar](https://github.com/timbot1789/solid-calendar), a personal calendar management app. The main challenges I have encountered are:
 
@@ -29,7 +29,7 @@ I have created prototype versions of two apps so far: [PASS](https://github.com/
 
 For solutions to this problem, I've experimented with data retrieval via SparQL queries to the Solid server provider. This allows for the creation of more complex data views, and it makes data retrieval far more performant. However, this means my apps are not technically Solid compliant, and I'm not sure how this behaves with access control.
 
-## Noel
+### Noel
 
 I've made all my apps with interoperability in mind, but in practice I haven't seen others that are interoperable out of the box (maybe [Solidflix](https://github.com/OxfordHCC/solid-media/issues/8) was the closest one). Although I haven't seen many apps tackling the same use case as mine either.
 
@@ -37,7 +37,7 @@ One challenge is that the main story for interoperability is not clear, and ther
 
 I'm interested in Shapes, but haven't used them yet because I haven't found any practical advantage for my apps. I'm also very interested in RDF reasoning and schema migrations, something like [Cambria](https://www.inkandswitch.com/cambria/) applied to Solid. As far as I know, all the current solutions for interop rely on knowing about some shapes during the implementation: to support new schemas, developers need to update their existing apps; this includes the work going on in solid-data-modules. I think it would be great if we could make apps interoperable after the fact, without requiring an update.
 
-## Vincent
+### Vincent
 
 > What's your experience with making Solid apps interoperable?
 
@@ -62,9 +62,9 @@ I might make an exception for apps that only concern private data that applies t
 
 ---
 
-# 2) Which aspects of app development more broadly do you struggle with? What kinds of tooling could be helpful with that?
+## 2) Which aspects of app development more broadly do you struggle with? What kinds of tooling could be helpful with that?
 
-## Vincent
+### Vincent
 
 It's mostly still just a hassle to lay out all the data the right way in a pod.
 
@@ -76,17 +76,17 @@ I'm still toying with the idea of one day writing a validator that allows you to
 
 As I tend to focus on web apps, I suppose there's an adoption challenge in getting people to think about them as such, rather than automatically reaching for a phone's app store.
 
-## Noel
+### Noel
 
 I think I'm missing best practices and final specifications (as opposed to drafts) moreso than tooling. But that might be because I've been building my own tooling, so I'm biased there 😅. I'm missing some alternatives for authentication though, because at the moment Inrupt's library is the only existing solution.
 
 If you want to know what I struggle with in App Development the list is endless xD. But to make it short, I'll only mention dependency hell :/. That is, making sure that updating one dependency doesn't break something, finding the compatible versions of two libraries, all the ESM vs CommonJS dilemma, etc. Dependency management in general is a bit of a mess, specially in JavaScript -.-. I think the problem arises from the fragmentation in the JS ecosystem, there are just too many tools and environments: Node, Deno, Bun, Webpack, Vite, Rollup, ESBuild, etc… All of that coupled with the fact that JavaScript is supposed to be backwards compatible, and add TypeScript into the mix, and you've got a big mess 😵. But it seems like most JS devs feel the same way, so I'm definitely not alone :/.
 
-## Tim
+### Tim
 
 A lot of Solid apps have moved to a design pattern of "load all the data you can from the pod into local memory, make changes locally, then commit all the changes back to the pod." This design pattern has numerous tradeoffs, but if it's the intended design pattern for pods, a framework that handles the data loading and saving for us would make things significantly easier.
 
-## Timea
+### Timea
 
 For me it's the frontend. I am not a designer to make things looks nice and functional at the same time 😅. And if one wants the RDF capability to make the frontend flexible, to adjust to the data model, well.. that is again difficult even if you know about RDF forms.
 
@@ -94,31 +94,31 @@ I know some of my friends are working on 'web components' for exactly this reaso
 
 ---
 
-# 3) What comes to mind when you think about interoperability working well? Can you share any examples or inspirations?
+## 3) What comes to mind when you think about interoperability working well? Can you share any examples or inspirations?
 
-## Tim
+### Tim
 
 To me, interoperability means different apps can access the same data in new, novel ways that fit their use case. A todo app allows you to create calendar events for each todo item without opening your calendar. Emails can be opened with either a traditional "inbox" interface or an IM chat interface. You can message your doctor, and then in the chat, share your medical records with them.
 
-## Vincent
+### Vincent
 
 I always was a bit sceptical about TimBL's "[Bag of Chips](https://www.w3.org/DesignIssues//BagOfChips.html)" idea: that different applications can look at different subsets of the same data. However, I recently tagged a Mastodon account on a Lemmy post, and then having their reply show up in-thread did feel magical. Likewise, when encountering an interesting post in my Mastodon timeline only to find out that it was a full-fledged blog, with replies shown as comments.
 
-## Timea
+### Timea
 
 Jackson Morgan's chat app LiquidChat and the one in SolidOS both use the same data.
 
 What I would like to see is, for example, fitness data stored on my pod with different fitness apps writing it and displaying it; maybe one app tracks movement well and another is awesome at suggesting improvements based on that data.
 
-## Noel
+### Noel
 
 To me interoperability should be transparent, where users don't even notice that it's going on. Quite the opposite, an ecosystem with working interoperability would be one where users are surprised if an app is not compatible with others.
 
 Some examples are Emails, RSS, the fediverse, webpages (browsers are interoperable), etc…
 
-# 4) What potential / ideal / dream Solid interactions or app paradigms would get you excited as a developer? And as a user?
+## 4) What potential / ideal / dream Solid interactions or app paradigms would get you excited as a developer? And as a user?
 
-## Noel
+### Noel
 
 As a developer, something like Cambria for Solid would be awesome. As I said, it would be great if it could work even without changing the code in my app. For example, if users themselves can "install schema translations" (or if that can happen automatically even better). In theory this is all possible with RDF reasoning, but in practice I don't think that's working anywhere.
 
@@ -126,19 +126,19 @@ As a user, I would like apps to leverage my pod data to augment the experience. 
 
 I've written more of my thoughts around this topic in [Interoperable Serendipity](https://noeldemartin.com/blog/interoperable-serendipity) and [Why Solid?](https://noeldemartin.com/blog/why-solid).
 
-## Timea
+### Timea
 
 Oh, I'm excited about everything when it comes to Solid so it's hard to choose ☺️ In theory, a developer can focus on creating the best frontend and functionality without bothering to learn databases and backend. Security topics which can be quite heavy should just work out of the box with Solid libraries and the developer shouldn't have to know how to configure it even (I'm thinking about spring security configuration which is not easy).
 
 I see advantages for users who care about privacy or supporting local businesses (rather than data monopolies), and there will be more as the ecosystem develops. I want to see an explosion of maximizing the usage and benefit of one's data in every aspect (which is not possible at the moment).
 
-## Vincent
+### Vincent
 
 I got interested in writing software because I was interested in what it could do for me, such as being able to learn from and keep in touch with people from all over the world, for example. Just the fact that Wikipedia exists is nothing short of amazing, to mention but one thing.
 
 So what gets me excited as a developer is what gets me excited as a user. And the primary thing that gets me excited about Solid as a user is being able to have my data collected somewhere under my control, rather than the current status quo where it is scatted across various arbitrary servers, vulnerable to app developers cutting off my access to it any moment. For example, to have my photos somewhere where I can find them in fifteen years (rather than spread over the different platforms I've used over the past fifteen years, or worse, gone forever because those platforms are gone), and not used by e.g. Facebook to tell other people that I'm in their pictures, or whatever other uses they'll come up with in the future that I haven't thought about today.
 
-## Tim
+### Tim
 
 I imagine Solid as a highly interactive data vault that can store any data you want, and that you can carry around with you for your entire life. You don't need to worry about losing your computer, or changing operating systems, or updating software. It follows you forever, always understandable.
 
