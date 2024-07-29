@@ -154,3 +154,7 @@ So what gets me excited as a developer is what gets me excited as a user. And th
 I imagine Solid as a highly interactive data vault that can store any data you want, and that you can carry around with you for your entire life. You don't need to worry about losing your computer, or changing operating systems, or updating software. It follows you forever, always understandable.
 
 As a developer, I like the idea of being able to interact with any data I can get access to about a user. The ability to create links between any information that the user may have allows for a wide variety of creative applications.
+
+---
+
+Published July 26th, 2024.
