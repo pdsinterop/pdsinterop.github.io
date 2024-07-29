@@ -8,6 +8,17 @@ In July 2024, we reached out to a handful of developers who have produced end-us
 
 [Noel De Martin](https://noeldemartin.com), [Vincent  Tunru](https://vincenttunru.com), [Timea Turdean](https://timeaturdean.com), and [Tim Standen](https://www.linkedin.com/in/tim-standen-6bb4b393) answered the call and their responses follow (edited for clarity, brevity, and flow).
 
+### Summary
+
+It's a challenge to integrate multiple data models or libraries, and document your own. Multiple or unofficial standards for pod discovery, type indexes, and servers makes building apps more complex. Views become coupled to the document format.
+
+Beyond Solid, dealing with unpredictable availability of data, supporting migrations, and the unwieldiness of JavaScript dependency hell adds another layer of challenges for any app developer. We need a framework that handles reading and writing data.
+
+Interop working well means multiple apps operating on the same data and this would ideally be seamless. Mastodon and the Fediverse are examples of how this feels like magic.
+
+
+It would be exciting to have schemas translating easily and ideally without needing to build them into the app. Security done right with a framework would let developers focus on the front end and app experience. Owning your data is a welcome relief to feeling beholden to large platforms
+
 ---
 
 ## 1) What's your experience with making Solid apps interoperable? What challenges have you encountered? What possible solutions are you looking for or working on?
