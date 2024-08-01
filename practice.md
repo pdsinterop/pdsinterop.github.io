@@ -17,7 +17,7 @@ Beyond Solid, dealing with unpredictable availability of data, supporting migrat
 Interop working well means multiple apps operating on the same data and this would ideally be seamless. Mastodon and the Fediverse are examples of how this feels like magic.
 
 
-It would be exciting to have schemas translating easily and ideally without needing to build them into the app. Security done right with a framework would let developers focus on the front end and app experience. Owning your data is a welcome relief to feeling beholden to large platforms
+It would be exciting to have schemas translating easily and ideally without needing to build them into the app. Security done right with a framework would let developers focus on the front end and app experience. Owning your data is a welcome relief to feeling beholden to large platforms.
 
 ---
 
