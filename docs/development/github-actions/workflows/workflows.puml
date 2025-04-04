@@ -1,0 +1,109 @@
+@startuml
+
+center header
+
+    <size:14><b>PDS Interop
+    GitHub Actions Workflow Dependencies
+
+endheader
+
+hide stereotypes
+'hide <<EMPTY>>
+'hide 04.generic
+'hide 08.generic
+
+'hide <<XML>>
+'hide <<YAML>>
+'hide <<JSON>>
+'hide <<PHP>>
+'hide <<DOCKER>>
+'hide <<NEXTCLOUD>>
+'hide <<MARKDOWN>>
+
+skinparam {
+    backgroundColor white
+    defaultTextAlign center
+
+    arrow {
+        color #888
+        thickness 2
+    }
+
+    card {
+        BackgroundColor #FFFFFF88
+        HeaderBackgroundColor #F0F
+    }
+    /'fileFontSize 1'/
+}
+
+card "01.preflight" as 01.generic {
+    label " "
+
+    file "01.preflight.json.lint-syntax" <<JSON>>
+    file "01.preflight.xml.lint-syntax" <<XML>>
+    file "01.preflight.yaml.lint-syntax" <<YAML>>
+}
+
+card "01.preflight.php" as 01.php {
+    file "01.preflight.php.lint-syntax" <<PHP>>
+    file "01.preflight.php.validate.dependencies-file" <<PHP>>
+
+    "01.preflight.php.lint-syntax" -[hidden]-  "01.preflight.php.validate.dependencies-file"
+}
+
+card "02.test" as 02.generic <<EMPTY>>
+
+card "02.test.php" as 02.php <<PHP>> {
+    file "02.test.php.test-unit" <<PHP>>
+}
+
+card "03.quality.docker" as 03.docker <<DOCKER>> {
+    file "03.quality.docker.lint" <<DOCKER>>
+}
+
+card "03.quality.markdown"  as 03.markdown <<MARKDOWN>> {
+    file "03.quality.markdown.lint" <<MARKDOWN>>
+    file "03.quality.markdown.lint-spelling" <<MARKDOWN>>
+
+    "03.quality.markdown.lint" -[hidden]- "03.quality.markdown.lint-spelling"
+}
+
+card "03.quality.php" as 03.php <<PHP>> {
+    file "03.quality.php.lint-version-compatibility" <<PHP>>
+    file "03.quality.php.scan.dependencies-vulnerabilities" <<PHP>>
+
+    "03.quality.php.lint-version-compatibility" -[hidden]- "03.quality.php.scan.dependencies-vulnerabilities"
+}
+
+card "03.quality.shell" as 03.shell <<SHELL>> {
+    file "03.quality.shell.lint" <<SHELL>>
+}
+
+card "04.build" as 04.generic {
+    file "04.build.nextcloud" as 04.nextcloud <<NEXTCLOUD>>
+    file "04.build.docker" as 04.docker <<DOCKER>>
+}
+
+card "05.scan" as 05.generic <<EMPTY>>
+card "06.deploy" as 06.generic <<EMPTY>>
+card "07.manifest" as 07.generic <<EMPTY>>
+
+card "08.publish" as 08.generic {
+    file "08.publish.nextcloud" <<NEXTCLOUD>>
+}
+01.generic   -->  02.generic
+01.php       --> 02.php
+02.generic   -->  03.docker
+02.generic   -->  03.markdown
+02.generic   -->  03.shell
+02.php       -->  03.php
+03.docker    -->  04.docker
+03.php       -->  04.nextcloud
+03.shell     -->  04.nextcloud
+04.generic   -->  05.generic
+04.nextcloud -->  "08.publish.nextcloud"
+05.generic   -->  06.generic
+06.generic   -->  07.generic
+07.generic   -->  08.generic
+
+@enduml

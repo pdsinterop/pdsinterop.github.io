@@ -1,0 +1,14 @@
+---
+name: Markdown Linting
+
+jobs:
+  lint-markdown-syntax:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/remark-lint
+        with:
+          args: >-
+            remark
+            --rc-path=.config/.remarkrc
+            --ignore-pattern='*/vendor/*'

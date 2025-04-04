@@ -1,0 +1,29 @@
+---
+name: Scan Dependencies Vulnerabilities
+
+jobs:
+  scan-dependencies-vulnerabilities-with-lock-file:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: >-
+            composer audit
+            --abandoned=report
+            --locked
+            --no-dev
+            --no-plugins
+            --no-scripts
+  scan-dependencies-vulnerabilities-without-lock-file:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install and Cache Composer dependencies
+        uses: "ramsey/composer-install@v2"
+        env:
+          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.GITHUB_TOKEN }}"}}'
+      - run: >-
+            composer audit
+            --abandoned=report
+            --no-dev
+            --no-plugins
+            --no-scripts

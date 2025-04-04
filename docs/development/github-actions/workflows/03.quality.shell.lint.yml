@@ -1,0 +1,17 @@
+---
+name: Shell Quality Linting
+
+jobs:
+  lint-shell-quality:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/shellcheck
+        with:
+          args: >-
+            find .
+            -not -path '*/.git/*'
+            -regex '.*\.\(ba\)\?sh'
+            -type f
+            -print0
+            | xargs -0 -r -n1 shellcheck

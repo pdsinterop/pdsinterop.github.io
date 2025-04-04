@@ -1,0 +1,14 @@
+---
+name: Shell Syntax Linting
+
+jobs:
+  lint-shell-syntax:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: >-
+          find .
+          -name
+          '*.sh'
+          -print0
+          | xargs -0 -P"$(nproc)" -I{} bash -n "{}"

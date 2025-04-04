@@ -1,0 +1,14 @@
+---
+name: Dockerfile Linting
+
+jobs:
+  lint-dockerfile:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/hadolint
+        with:
+          args: >-
+            hadolint
+            --config .config/hadolint.yml
+            Dockerfile

@@ -1,0 +1,16 @@
+---
+name: PHP Syntax Linting
+
+jobs:
+  lint-php-syntax:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/php-linter
+        with:
+          args: >-
+            parallel-lint
+            --exclude .git
+            --exclude vendor
+            --no-progress
+            .

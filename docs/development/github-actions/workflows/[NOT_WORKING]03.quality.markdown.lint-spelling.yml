@@ -1,0 +1,18 @@
+---
+name: Markdown Spellcheck
+
+jobs:
+  spellcheck-markdown:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/markdown-spellcheck
+        with:
+          args: >-
+            mdspell
+            --en-us
+            --ignore-numbers
+            --report
+            '**/*.md'
+            '\\!**/node_modules/**/*.md'
+            '\\!**/vendor/**/*.md'
