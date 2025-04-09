@@ -43,7 +43,7 @@ Our main projects are:
 - **[Awesome Solid](https://pdsinterop.org/awesome-solid/)**
   Awesome list of Solid (social inked data) tools, libraries, resources, and 
   shiny things (project lead Ben Peachey).
-- **[Solid Migrator]([https://pdsinterop.org/pds-migrator/](https://pdsinterop.org/solid-migrator/))** Making it easy to move data 
+- **[Solid Migrator](https://pdsinterop.org/pds-migrator/)** Making it easy to move data 
   from one server to another (project lead Yvo Brevoort).
 
 For other software projects, see [our Github org](https://github.com/pdsinterop).
