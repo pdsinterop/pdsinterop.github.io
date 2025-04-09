@@ -1,0 +1,47 @@
+@startuml
+
+left to right direction
+
+card yaml {
+    file "01.preflight.yaml.lint.yml"
+}
+
+card xml {
+    file "01.preflight.xml.lint-syntax.yml"
+}
+
+card shell {
+    file "01.preflight.shell.lint-syntax.yml"
+    file "03.quality.shell.lint.yml"
+
+    "01.preflight.shell.lint-syntax.yml" <-- "03.quality.shell.lint.yml"
+}
+
+card php {
+    file "01.preflight.php.lint-syntax.yml"
+    file "01.quality.php.validate.dependencies-file.yml"
+    file "02.test.php.test-unit.yml"
+    file "03.quality.php.scan.dependencies-vulnerabilities.yml"
+    file "03.quality.php.lint-version-compatibility.yml"
+
+    "01.preflight.php.lint-syntax.yml" <-- "02.test.php.test-unit.yml"
+    "01.preflight.php.lint-syntax.yml" <-- "03.quality.php.lint-version-compatibility.yml"
+    "01.quality.php.validate.dependencies-file.yml" <-- "02.test.php.test-unit.yml"
+    "01.quality.php.validate.dependencies-file.yml" <-- "03.quality.php.scan.dependencies-vulnerabilities.yml"
+}
+
+card markdown {
+    file "01.quality.markdown.lint-syntax.yml"
+    file "03.quality.markdown.lint-spelling.yml"
+
+    "01.quality.markdown.lint-syntax.yml" <-- "03.quality.markdown.lint-spelling.yml"
+}
+
+card json {
+    file "01.preflight.json.lint-syntax.yml"
+}
+
+card docker {
+    file "03.quality.docker.lint.yml"
+}
+@enduml

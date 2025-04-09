@@ -1,0 +1,15 @@
+---
+name: XML Linting
+
+jobs:
+  lint-xml:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/xmllint
+        with:
+          args: >-
+            find .
+            -iname '*.xml'
+            -type f
+            -exec xmllint --noout {} \+

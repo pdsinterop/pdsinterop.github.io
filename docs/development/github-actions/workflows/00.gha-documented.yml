@@ -1,0 +1,143 @@
+---
+name: ...
+
+on:
+  # `github.event_name` == `pull_request`
+  # The workflow will be run against the commits, after merge to the target branch
+  # To subscribe to this event, a GitHub App must have at least read-level access
+  # for the "Pull requests" repository permission.
+  #
+  # This event occurs when there is activity on a pull request. To limit the type of actions the workflow run on,
+  # specify action types (`github.event.action`).
+  #
+  # - `opened` A pull request was created
+  # - `reopened` A previously closed pull request was reopened.
+  # - `edited` The title or body of a pull request was edited, or the base branch of a pull request was changed.
+  # - `closed` A pull request was closed.
+  #    If `merged` is `false`, the pull request was closed with unmerged commits.
+  #    If `merged` is `true`, the pull request was merged.
+  # - `synchronize` A pull request's head branch was updated. For example, the head branch was updated from the base branch or new commits were pushed to the head branch.
+  #
+  # Other types include actions related to assign, label, WIP, review requests, etc.
+  #
+  # For full details visit https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request
+  pull_request:
+    branches: [ main ]
+    types: [ opened, reopened, synchronize ]
+
+  # The workflow will be run against the commits on the branch
+  # To subscribe to this event, a GitHub App must have at least read-level access for the "Contents" repository permission.
+  # This event occurs when there is a push to a repository branch.
+  # This includes when a commit is pushed, when a commit tag is pushed, when a branch is deleted, when a tag is deleted
+  #
+  # For full details visit https://docs.github.com/en/webhooks/webhook-events-and-payloads#push
+  push:
+    paths:
+    tags: '**'
+
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+# github.sha
+# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # Cancels all previous workflow runs for the same branch that have not yet completed.
+  #
+  # The concurrency group contains the workflow name and the "ref".
+  # The given ref is fully-formed.
+  #
+  # | Reference     | Trigger        | Format                                               |
+  # | ------------- | -------------- | ---------------------------------------------------- |
+  # | Branch or Tag | `push`         | `refs/heads/<branch_name>` or `refs/tags/<tag_name>` |
+  # | Merge branch  | `pull_request` | `refs/pull/<pr_number>/merge`                        |
+  # | Release tag   | `release`      | (?) Is this the same as "commit tag"?                |
+  # | Branch or Tag | other          | `refs/heads/<branch_name>` or `refs/tags/<tag_name>` |
+  group: ${{ github.workflow }}-${{ github.ref }} # @CHECKME: Should we use ref? or sha? Why?
+  cancel-in-progress: true
+
+permissions:
+  # Needed to allow the "concurrency" section to cancel a workflow run.
+  actions: write
+
+jobs:
+  php:
+    # continue-on-error: ${{ matrix.php < '8.1' || matrix.php > '8.4' || matrix.php < '28'  || matrix.nextcloud > '30' }}
+    # continue-on-error: ${{ contains(fromJson('[28,29,30]'), matrix.nextcloud_version) == false }}
+    # @TODO: Add "supported PHP versions" and/or "supported Nextcloud versions" to the README and/or a central location.
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - 7.2  # from 2017-11 to 2019-11 (2020-11)
+          - 7.3  # from 2018-12 to 2020-12 (2021-12)
+          - 7.4  # from 2019-11 to 2021-11 (2022-11)
+          - 8.0  # from 2020-11 to 2022-11 (2023-11)
+          - 8.1  # from 2021-11 to 2023-11 (2025-12)
+          - 8.2  # from 2022-12 to 2024-12 (2026-12)
+          - 8.3  # from 2023-11 to 2025-12 (2027-12)
+          - 8.4  # from 2024-11 to 2026-12 (2028-12)
+          - 8.5  # from 2025-11 to 2027-12 (2029-12)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          # Needed for coverage reports (i.e. "risky" because of @covers and @uses annotations)
+          # @TODO: Document what using `@covers` and `@uses` annotations means
+          coverage: xdebug
+          ini-values: error_reporting=E_ALL, display_errors=On
+          php-version: ${{ matrix.php }}
+      # Is cache needed / wanted for the composer install as a separate step?
+      # - uses: actions/cache@v2
+      #   with:
+      #     path: /tmp/composer-cache
+      #     key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+      - name: Install and Cache Composer dependencies
+        uses: "ramsey/composer-install@v2"
+        env:
+          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.GITHUB_TOKEN }}"}}'
+        with:
+          # The `--no-interaction`, `--no-progress`, and `--ansi` options are
+          # always passed to the composer command. Additional options can be
+          # passed, using the `composer-options` input parameter.
+          composer-options: --no-scripts
+      # This works when/because `config.bin-dir` has been set to `./bin` in the
+      # `composer.json` file. other wise `./vendor/bin/phpunit` should be used
+      - run: bin/phpunit --configuration .config/phpunit.xml.dist
+      # I do not like this. I understand the need for PHP Install, but I would
+      # rather use the pipeline-components/phpunit container.
+      # The issue is the PHPUnit version installed by composer vs. the version
+      # in the container.
+
+  lint-yaml:
+    #  If your workflows use Docker container actions, job containers, or
+    # service containers, then you must use a Linux runner. If you are using
+    # GitHub-hosted runners, you must use an Ubuntu runner.
+    # For installed software and versions, see:
+    # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      # https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#example-using-a-docker-hub-action
+      # A string that defines the inputs for a Docker container. GitHub passes
+      # the args to the container's ENTRYPOINT when the container starts up. An
+      # array of strings is not supported by this parameter. A single argument
+      # that includes spaces should be surrounded by double quotes ""
+      # docker://{image}:{tag}
+      # docker://{host}/{image}:{tag}.
+      - uses: docker://pipelinecomponents/xmllint
+        with:
+          # Block Scaler Style (>) replace newlines with spaces (i.e. "folded"),
+          # but leaves a single newline at end (i.e. "clip")
+          # Block chomping indicator (-) newline at end (i.e. "strip")
+          args: >-
+            find .
+            -iname "*.xml"
+            -type f
+            -exec xmllint --noout {} \+
+
+# https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepswithargs
+# jobs.<job_id>.steps[*].with.args
+#
+# A string that defines the inputs for a Docker container. GitHub passes the args to the container's ENTRYPOINT when the container starts up. An array of strings is not supported by this parameter. A single argument that includes spaces should be surrounded by double quotes "".

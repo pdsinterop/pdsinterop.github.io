@@ -1,0 +1,17 @@
+---
+name: PHP Quality Linting
+
+jobs:
+  php-lint-quality:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/php-codesniffer
+        with:
+          args: >-
+            phpcs
+            -s
+            --extensions=php
+            --ignore='*vendor/*'
+            --standard=.config/phpcs.xml.dist
+            .

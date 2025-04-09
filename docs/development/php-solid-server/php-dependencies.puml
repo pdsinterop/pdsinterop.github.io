@@ -1,0 +1,81 @@
+@startuml
+
+'left to right direction
+
+'!pragma layout smetana
+
+hide stereotype
+
+'hide <<VENDOR>>
+
+skinparam {
+    backgroundColor transparent
+
+    rectangleBackgroundColor #EE8
+    rectangleBackgroundColor<<VENDOR>> white
+    ranksep 100
+}
+
+rectangle "codercat/jwk-to-pem" <<VENDOR>> as codercat.jwk_to_pem
+rectangle "defuse/php-encryption" <<VENDOR>> as defuse.php_encryption
+rectangle "easyrdf/easyrdf" <<VENDOR>> as easyrdf.easyrdf
+rectangle "laminas/laminas-diactoros" <<VENDOR>> as laminas.laminas_diactoros
+rectangle "laminas/laminas-httphandlerrunner" <<VENDOR>> as laminas.laminas_httphandlerrunner
+rectangle "lcobucci/jwt" <<VENDOR>> as lcobucci.jwt
+rectangle "league/container" <<VENDOR>> as league.container
+rectangle "league/flysystem" <<VENDOR>> as league.flysystem
+rectangle "league/oauth2-server" <<VENDOR>> as league.oauth2_server
+rectangle "league/route" <<VENDOR>> as league.route
+rectangle "mjrider/flysystem-factory" <<VENDOR>> as mjrider.flysystem_factory
+rectangle "ml/json-ld" <<VENDOR>> as ml.json_ld
+rectangle "php-http/httplug" <<VENDOR>> as php_http.httplug
+rectangle "phptal/phptal" <<VENDOR>> as phptal.phptal
+rectangle "pietercolpaert/hardf" <<VENDOR>> as pietercolpaert.hardf
+rectangle "psr/http-factory" <<VENDOR>> as psr.http_factory
+rectangle "psr/http-message" <<VENDOR>> as psr.http_message
+rectangle "textalk/websocket" <<VENDOR>> as textalk.websocket
+rectangle "web-token/jwt-core" <<VENDOR>> as web_token.jwt_core
+
+rectangle "pdsinterop/solid-server" as pdsinterop.solid_server
+
+rectangle "pdsinterop/flysystem-rdf" as pdsinterop.flysystem_rdf
+rectangle "pdsinterop/solid-auth" as pdsinterop.solid_auth
+rectangle "pdsinterop/solid-crud" as pdsinterop.solid_crud
+
+
+pdsinterop.solid_auth --> laminas.laminas_diactoros
+pdsinterop.solid_auth -u-> lcobucci.jwt
+pdsinterop.solid_auth -u-> league.oauth2_server
+pdsinterop.solid_auth --> web_token.jwt_core
+
+pdsinterop.flysystem_rdf -u-> easyrdf.easyrdf
+pdsinterop.flysystem_rdf --> league.flysystem
+pdsinterop.flysystem_rdf -r-> ml.json_ld
+
+pdsinterop.solid_crud -u-> laminas.laminas_diactoros
+pdsinterop.solid_crud -u-> league.flysystem
+pdsinterop.solid_crud -l-> pdsinterop.flysystem_rdf
+pdsinterop.solid_crud --> mjrider.flysystem_factory
+pdsinterop.solid_crud --> pietercolpaert.hardf
+pdsinterop.solid_crud -l-> psr.http_factory
+pdsinterop.solid_crud -r-> psr.http_message
+pdsinterop.solid_crud --> textalk.websocket
+
+pdsinterop.solid_server --> laminas.laminas_diactoros
+pdsinterop.solid_server --> lcobucci.jwt
+pdsinterop.solid_server --> league.flysystem
+pdsinterop.solid_server --> league.oauth2_server
+pdsinterop.solid_server --> pdsinterop.flysystem_rdf
+pdsinterop.solid_server --> pdsinterop.solid_auth
+pdsinterop.solid_server --> pdsinterop.solid_crud
+
+pdsinterop.solid_server --> easyrdf.easyrdf
+pdsinterop.solid_server -r-> codercat.jwk_to_pem
+pdsinterop.solid_server -u-> defuse.php_encryption
+pdsinterop.solid_server -u-> laminas.laminas_httphandlerrunner
+pdsinterop.solid_server -u-> league.container
+pdsinterop.solid_server -u-> league.route
+pdsinterop.solid_server -u-> php_http.httplug
+pdsinterop.solid_server -l-> phptal.phptal
+
+@enduml

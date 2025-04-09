@@ -1,0 +1,36 @@
+---
+name: Tests
+
+env:
+  SERVER: production
+
+defaults:
+  run:
+    shell: bash
+    working-directory: scripts
+
+on:
+  - pull_request
+  - push
+
+jobs:
+  pipeline-component:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        php: ['7.3', '7.4']
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v2
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: error_reporting=E_ALL, display_errors=On
+          coverage: none
+      - uses: "ramsey/composer-install@v2"
+      - run: ./vendor/bin/phpunit

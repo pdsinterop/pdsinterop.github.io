@@ -1,0 +1,63 @@
+---
+example-job:
+  runs-on: ubuntu-24.04
+  strategy:
+    matrix:
+      php:
+        - 7.2  # from 2017-11 to 2019-11 (2020-11)
+        - 7.3  # from 2018-12 to 2020-12 (2021-12)
+        - 7.4  # from 2019-11 to 2021-11 (2022-11)
+        - 8.0  # from 2020-11 to 2022-11 (2023-11)
+        - 8.1  # from 2021-11 to 2023-11 (2025-12)
+        - 8.2  # from 2022-12 to 2024-12 (2026-12)
+        - 8.3  # from 2023-11 to 2025-12 (2027-12)
+        - 8.4  # from 2024-11 to 2026-12 (2028-12)
+        - 8.5  # from 2025-11 to 2027-12 (2029-12)
+
+      nextcloud:
+        - 20  # (Hub 01) from 2020-10 to 2021-11
+        - 21  # (Hub 01) from 2021-02 to 2022-02
+        - 22  # (Hub 01) from 2021-07 to 2022-07
+        - 23  # (Hub 02) from 2021-11 to 2022-12
+        - 24  # (Hub 03) from 2022-05 to 2023-04
+        - 25  # (Hub 03) from 2022-10 to 2023-10
+        - 26  # (Hub 04) from 2023-03 to 2024-03
+        - 27  # (Hub 06) from 2023-06 to 2024-06
+        - 28  # (Hub 07) from 2023-12 to 2024-12
+        - 29  # (Hub 08) from 2024-04 to 2025-04
+        - 30  # (Hub 09) from 2024-09 to 2025-09
+        - 31  # (Hub 10) from 2025-02
+  continue-on-error: ${{ matrix.php == '8.5' || matrix.nextcloud > '30'  || matrix.nextcloud < '28' }}
+  steps: ...
+
+---
+
+name: Catch inconsiderate writing
+
+jobs:
+  markdown-inconsiderate-writing:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/alex
+        with:
+          args: >-
+            alex
+            --why
+            ./*.md ./**/*.md
+
+---
+
+name: Markdown Linting
+
+jobs:
+  lint-markdown:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/markdownlint
+        with:
+          args: >-
+            mdl
+            --warnings
+            ./*.md ./**/*.md

@@ -1,0 +1,19 @@
+---
+name: JSON Syntax Linting
+
+jobs:
+  lint-json-syntax:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://pipelinecomponents/jsonlint
+        with:
+          args: >-
+            find .
+            -not -path '*/.git/*'
+            -not -path '*/node_modules/*'
+            -not -path '*/vendor/*'
+            -name '*.json'
+            -type f
+            -exec jsonlint --quiet {} ;
+          # args: "find . -not -path '*/.git/*' -name '*.json' -type f"

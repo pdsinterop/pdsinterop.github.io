@@ -1,0 +1,51 @@
+@startuml
+
+file TARBALL as tarball
+
+card "Check version" as job.01 {
+    rectangle "Check versions in `appinfo/info.xml`" as job.01.step.01
+    rectangle "Checkout" as job.01.step.02
+
+    job.01.step.02 <-- job.01.step.01
+}
+
+card "Create Tarball" as job.02 {
+    rectangle "Checkout" as job.02.step.01
+    rectangle "Install Dependencies" as job.02.step.02
+    rectangle "Create tarball" as job.02.step.03
+    rectangle "Upload Artifact" as job.02.step.04
+
+    job.02.step.01 <-- job.02.step.02 : CODE_BASE
+    job.02.step.02 <-- job.02.step.03 : VENDOR_DIR
+    job.02.step.03 <-- job.02.step.04 : TARBALL_FILE
+}
+
+card "Upload to GitHub" as job.03 {
+    rectangle "Download Artifact" as job.03.step.01
+    rectangle "Fetch upload URL" as job.03.step.02
+    rectangle "Upload tarball to GitHub" as job.03.step.03
+
+    job.03.step.01 <-- job.03.step.03 : TARBALL_FILE
+    job.03.step.02 <-- job.03.step.03 : UPLOAD_URL
+}
+
+card "Publish to Nextcloud" as job.04 {
+    rectangle "Download Artifact" as job.04.step.01
+    rectangle "Create signature" as job.04.step.02
+    rectangle "Create JSON blob" as job.04.step.03
+    rectangle "Publish to nextcloud" as job.04.step.04
+
+    job.04.step.01 <-- job.04.step.02 : TARBALL_FILE
+    job.04.step.02 <-- job.04.step.03 : SIGNATURE
+    job.04.step.03 <-- job.04.step.04 : JSON
+}
+
+job.02.step.04 --> tarball
+job.03.step.01 <-- tarball
+job.04.step.01 <-- tarball
+
+job.01 <-- job.02: VERSION_CHECK
+job.02 <-- job.03: TARBALL
+job.03.step.03 <-- job.04: TARBALL_URL
+
+@enduml

@@ -1,0 +1,22 @@
+---
+on:
+  # This event occurs when there is activity on a pull request. The workflow
+  # will be run against the commits, after merge to the target branch (main).
+  pull_request:
+    branches: [ main ]
+    types: [ opened, reopened, synchronize ]
+  # This event occurs when there is a push to the repository.
+  push:
+    paths:
+  # Allow manually triggering the workflow.
+  workflow_dispatch:
+
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+  permissions:
+    # Needed to allow the "concurrency" section to cancel a workflow run.
+    actions: write
+
+jobs:
